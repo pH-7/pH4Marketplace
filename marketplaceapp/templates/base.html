@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Markerplace</title>
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    </head>
+    <body>
+        <header>
+            Header
+        </header>
+        <hr />
+        {% block page %}
+
+        {% endblock %}
+
+        <footer>
+
+        </footer>
+    </body>
+</html>
