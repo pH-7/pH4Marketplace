@@ -44,16 +44,31 @@
                         </ul>
                     </div>
                 </div>
+                <div id="category">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Scripts &amp; Software</a></li>
+                            <li><a href="#">Graphics &amp; Design</a></li>
+                            <li><a href="#">Web Marketing</a></li>
+                            <li><a href="#">Videos</a></li>
+                            <li><a href="#">Music &amp; Sounds</a></li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </header>
 
-        <hr />
-        {% block page %}
+        <div id="body">
+            <div class="container">
+                {% block page %}
+                {% endblock %}
+            </div>
+        </div>
 
-        {% endblock %}
-
-        <footer>
-
+        <footer id="footer">
+            <div class="container">
+                <span><strong><a href="https://ph4marketplace.com">pH4Marketplace</a></strong> &copy; 2018</span>
+            </div>
         </footer>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
     </body>
