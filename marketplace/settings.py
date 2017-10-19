@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -114,6 +115,10 @@ STATIC_URL = '/static/'
 # To serve static files to Heroku
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+# Replace DB config to use PostgreSQL for Heroku
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
