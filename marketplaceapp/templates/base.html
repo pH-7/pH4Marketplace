@@ -28,6 +28,7 @@
                             {% if user and not user.is_anonymous %}
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <img src="{% static 'img/avatar.png' %}" class="img-circle" height="22" width="22">
                                         {{ user.get_full_name|default:user.username }} <spam class="caret"></spam>
                                     </a>
                                     <ul class="dropdown-menu">
