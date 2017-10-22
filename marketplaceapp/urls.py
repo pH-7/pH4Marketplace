@@ -1,5 +1,4 @@
 from django.conf.urls import url
-
 from marketplaceapp import views
 
 urlpatterns = [

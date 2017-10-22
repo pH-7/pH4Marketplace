@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^social/', include('social_django.urls', namespace='social')),
     url(r'^auth/', include('django.contrib.auth.urls', namespace='auth')),
-    url('', include('marketplaceapp.urls'))
+    url('', include('marketplaceapp.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

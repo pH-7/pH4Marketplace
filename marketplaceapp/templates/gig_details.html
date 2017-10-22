@@ -7,9 +7,9 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>I will create the best website</h3>
+                    <h3>{{ gig.title }}</h3>
                     <hr>
-                    <img src="{% static 'img/gig.png' %}" alt="" class="img-responsive center-block">
+                    <img src="{{ media_url }}{{ gig.photo }}" alt="{{ gig.title }}" class="img-responsive center-block">
                 </div>
             </div>
             <div class="panel panel-default">
@@ -17,7 +17,7 @@
                     <h4>About This Gig</h4>
                 </div>
                 <div class="panel-body">
-                    <p>I will create your website in 1 day!!</p>
+                    <p>{{ gig.description }}</p>
                 </div>
             </div>
             <div class="panel panel-default">
@@ -46,16 +46,16 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <button type="button" class="btn btn-success btn-block">
-                        Order Now ($5)
+                        Order Now (${{ gig.price }})
                     </button>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="{% static 'img/avatar.png' %}" alt="" class="img-circle center-block" height="100" width="100">
-                    <h4 class="text-center">Iron Man</h4>
+                    <img src="{% if gig.user.profile.avatar %} {{ gig.user.profile.avatar }} {% else %} {% static 'img/avatar.png' %} {% endif %}" alt="{{ gig.user.username }}" class="img-circle center-block" height="100" width="100">
+                    <h4 class="text-center">{{ gig.user.username }}</h4>
                     <hr>
-                    <p>I have 5 years of commercial expericence and ...</p>
+                    <p>{{ gig.user.profile.about }}</p>
                 </div>
             </div>
         </div>
