@@ -130,3 +130,16 @@ LOGIN_REDIRECT_URL = '/'
 # Facebook API details
 SOCIAL_AUTH_FACEBOOK_KEY = '832892270226458'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a81269a0fe3dca0a62b25188528b265d'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'marketplaceapp.social_auth_pipeline.save_avatar',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
