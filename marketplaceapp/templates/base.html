@@ -33,13 +33,20 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
+                                            <a href="{% url 'create_gig' %}">Create a Gig</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'my_gigs' %}">My Gigs</a>
+                                        </li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>
                                             <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
                                         </li>
                                     </ul>
                                 </li>
                             {% else %}
                                 <li>
-                                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login</a>
+                                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" title="Login with Facebook">Login</a>
                                 </li>
                             {% endif %}
                         </ul>
