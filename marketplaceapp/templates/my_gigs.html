@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block page %}
+    <h1>My Gigs</h1>
+    <div class="panel panel-default">
+        <table class="table table-borded table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <th>Gig Title</th>
+                        <th>Price ($)</th>
+                        <th>Status</th>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for gig in gigs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ gig.title }}</td>
+                        <td>{{ gig.price }}</td>
+                        <td>{% if gig.status %} Active {% else %} Disabled {% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
