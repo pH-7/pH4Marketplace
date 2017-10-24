@@ -49,6 +49,14 @@ def create_gig(request):
     )
 
 @login_required(login_url='/')
+def edit_gig(request, id):
+    return render(
+        request,
+        'edit_gog.html',
+        {}
+    )
+
+@login_required(login_url='/')
 def my_gigs(request):
     gigs = Gig.objects.filter(user=request.user)
 
