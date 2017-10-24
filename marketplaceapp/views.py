@@ -50,11 +50,26 @@ def create_gig(request):
 
 @login_required(login_url='/')
 def edit_gig(request, id):
-    return render(
-        request,
-        'edit_gog.html',
-        {}
-    )
+    try:
+        gig = Gig.objects.get(id=id, user=request.user)
+        error = '' # Default value
+
+        if request.method == 'POST':
+            gig_form = GigForm(request.POST, request.FILES, instance=gig)
+            if gig_form.is_valid():
+                gig.save()
+                return redirect(my_gigs)
+            else:
+                error = 'The data is not valid'
+
+        return render(
+            request,
+            'edit_gig.html',
+            {'gig': gig, 'error': error, 'media_url': MEDIA_URL}
+        )
+
+    except Gig.DoesNotExist:
+        return redirect(home)
 
 @login_required(login_url='/')
 def my_gigs(request):
