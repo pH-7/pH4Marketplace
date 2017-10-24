@@ -9,7 +9,11 @@ from marketplaceapp.forms import GigForm
 
 def home(request):
     gigs = Gig.objects.filter(status=True)
-    return render(request, 'home.html', {'gigs': gigs, 'media_url': MEDIA_URL})
+    return render(
+        request,
+        'home.html',
+        {'gigs': gigs, 'media_url': MEDIA_URL}
+    )
 
 def gig_details(request, id):
     try:
