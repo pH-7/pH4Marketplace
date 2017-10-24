@@ -21,7 +21,11 @@ def gig_details(request, id):
     except Gig.DoesNotExist:
         return redirect(home)
 
-    return render(request, 'gig_details.html', {'gig': gig, 'media_url': MEDIA_URL})
+    return render(
+        request,
+        'gig_details.html',
+        {'gig': gig, 'media_url': MEDIA_URL}
+    )
 
 @login_required(login_url='/')
 def create_gig(request):
@@ -39,12 +43,17 @@ def create_gig(request):
     gig_form = GigForm()
 
     return render(
-        request, 'create_gig.html',
-        {'gig_form': gig_form, 'error': error}
+        request,
+        'create_gig.html',
+        {'error': error}
     )
 
 @login_required(login_url='/')
 def my_gigs(request):
     gigs = Gig.objects.filter(user=request.user)
 
-    return render(request, 'my_gigs.html', {'gigs': gigs})
+    return render(
+        request,
+        'my_gigs.html',
+        {'gigs': gigs}
+    )
