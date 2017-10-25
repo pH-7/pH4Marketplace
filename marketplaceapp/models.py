@@ -8,9 +8,9 @@ from django.db import models
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.CharField(max_length=500)
-    about = models.CharField(max_length=1000)
-    slogan = models.CharField(max_length=500)
+    avatar = models.CharField(max_length=500, blank=True)
+    bio = models.CharField(max_length=1000, blank=True)
+    slogan = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -28,7 +28,7 @@ class Gig(models.Model):
     category = models.CharField(max_length=2, choices=CATEGORY_CHOICES)
     description = models.CharField(max_length=1000)
     price = models.IntegerField(default=6)
-    photo = models.FileField(upload_to='gigs')
+    photo = models.FileField(upload_to='gigs', blank=False)
     status = models.BooleanField(default=True)
     user = models.ForeignKey(User)
     create_time = models.DateTimeField(default=timezone.now)
