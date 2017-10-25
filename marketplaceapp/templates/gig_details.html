@@ -52,8 +52,8 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <img src="{% if gig.user.profile.avatar %} {{ gig.user.profile.avatar }} {% else %} {% static 'img/avatar.png' %} {% endif %}" alt="{{ gig.user.username }}" class="img-circle center-block" height="100" width="100">
-                    <h4 class="text-center">{{ gig.user.username }}</h4>
+                    <a href="{% url 'profile' gig.user.username %}"><img src="{% if gig.user.profile.avatar %}{{ gig.user.profile.avatar }}{% else %}{% static 'img/avatar.png' %}{% endif %}" alt="{{ gig.user.username }}" title="See profile details" class="img-circle center-block" height="100" width="100"></a>
+                    <a href="{% url 'profile' gig.user.username %}" title="See profile page"><h4 class="text-center">{{ gig.user.username }}</h4></a>
                     <hr>
                     <p>{{ gig.user.profile.about }}</p>
                 </div>
