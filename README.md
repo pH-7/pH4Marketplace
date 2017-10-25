@@ -5,6 +5,7 @@
 
 ## Powered by ...
 
-* Python 3.6 (or higher).
-* Django 1.11
-* Bootstrap 3.3.7
+* [Python](https://python.org) 3.6 (or higher).
+* [Django](https://djangoproject.com) 1.11
+* [Python Social-Auth](https://github.com/python-social-auth/social-core)
+* [Bootstrap](https://getbootstrap.com) 3.3.7
