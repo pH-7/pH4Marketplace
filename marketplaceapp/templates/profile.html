@@ -2,9 +2,20 @@
 {% load staticfiles %}
 
 {% block page %}
+    {% if request.user == profile.user %}
+        <form method="post">
+        {% csrf_token %}
+    {% endif %}
+
     <div class="jumbotron text-center">
         <h1>{{ profile.user.username }}'s profile</h1>
-        <p>{{ profile.slogan }}</p>
+        <p>
+            {% if request.user == profile.user %}
+                <input type="text" class="form-control" name="slogan" value="{{ profile.slogan }}">
+            {% else %}
+                {{ profile.slogan }}
+            {% endif %}
+        </p>
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
@@ -15,9 +26,22 @@
                 About {{ profile.user.username }}
             </h4>
             <hr>
-            <p>&laquo; <span class="italic">{{ profile.bio }}</span> &raquo;</p>
+            <p>
+                {% if request.user == profile.user %}
+                    <input type="text" class="form-control" name="bio" value="{{ profile.bio }}">
+                {% else %}
+                    &laquo; <span class="italic">{{ profile.bio }}</span> &raquo;
+                {% endif %}
+            </p>
         </div>
     </div>
+    {% if request.user == profile.user %}
+        <button type="submit" class="btn btn-success">Update Profile</button>
+    {% endif %}
+
+    {% if request.user == profile.user %}
+        </form>
+    {% endif %}
 
     <h3 class="text-uppercase margin-heading">{{ profile.user.username }}'s gigs'</h3>
     <div class="row">
