@@ -65,7 +65,7 @@
                     <div class="col-sm-10">
                         <p>
                             {% if gig.photo %}
-                                Current one <img src="{{ media_url }}{{ gig.image }}" alt="{{ gig.title }}" height="250" width="250"><br>
+                                <img src="{{ media_url }}{{ gig.photo }}" alt="{{ gig.title }}" class="img-thumbnail" height="180" width="180"><br>
                             {% endif %}
                             <input type="file" class="form-control" id="image" name="photo">
                         </p>
