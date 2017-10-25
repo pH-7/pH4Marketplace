@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from marketplace.settings import MEDIA_URL
-from marketplaceapp.models import Gig
+from marketplaceapp.models import Gig, Profile
 from marketplaceapp.forms import GigForm
 
 def home(request):
@@ -82,8 +82,13 @@ def my_gigs(request):
     )
 
 def profile(request, username):
+    try:
+        profile = Profile.objects.get(user__username=username)
+    except Profile.DoesNotExist:
+        return redirect(home)
+
     return render(
         request,
         'profile.html',
-        {}
+        {'profile': profile}
     )
