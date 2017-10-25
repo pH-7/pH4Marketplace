@@ -3,17 +3,45 @@
 
 {% block page %}
     <div class="jumbotron text-center">
-        <h1>{{ profile.user.username }}</h1>
+        <h1>{{ profile.user.username }}'s profile</h1>
         <p>{{ profile.slogan }}</p>
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <p><img src="{{ profile.avatar }}" alt="{{ profile.user.username }}" class="img-rounded" height="120" width="120"></p>
+            <p>
+                <img src="{% if profile.avatar %}{{ profile.avatar }}{% else %}{% static 'img/avatar.png' %}{% endif %}" alt="{{ profile.user.username }}" class="img-rounded" height="120" width="120">
+            </p>
             <h4 class="text-uppercase">
                 About {{ profile.user.username }}
             </h4>
             <hr>
-            <p>{{ profile.about }}</p>
+            <p>&laquo; <span class="italic">{{ profile.bio }}</span> &raquo;</p>
         </div>
+    </div>
+
+    <h3 class="text-uppercase margin-heading">{{ profile.user.username }}'s gigs'</h3>
+    <div class="row">
+        {% for gig in gigs %}
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <a href="{% url 'gig_details' gig.id %}">
+                        <img src="{{ media_url }}{{ gig.photo }}" alt="{{ gig.title }}">
+                    </a>
+                    <div class="caption">
+                        <p>
+                            <a href="{%  url 'gig_details' gig.id}">{{ gig.description }}</a>
+                        </p>
+                        <p>
+                            <span>
+                                <a href="{% url 'profile' gig.user.username %}">{{ gig.user.username }}</a>
+                            </span>
+                            <span class="bold green pull-right">
+                                ${{ gig.price }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

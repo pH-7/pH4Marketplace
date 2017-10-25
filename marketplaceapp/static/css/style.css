@@ -35,6 +35,10 @@ a:hover {
     font-weight: bold;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .green {
     color: #0bb536;
 }
