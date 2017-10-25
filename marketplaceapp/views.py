@@ -80,3 +80,10 @@ def my_gigs(request):
         'my_gigs.html',
         {'gigs': gigs}
     )
+
+def profile(request, username):
+    return render(
+        request,
+        'profile.html',
+        {}
+    )

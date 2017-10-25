@@ -18,7 +18,7 @@
                             <a href="{% url 'gig_details' gig.id %}">{{ gig.title }}</a>
                         </p>
                         <p>
-                            <span>by <a href="#">{{ gig.user.username }}</a></span>
+                            <span>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.username }}</a></span>
                             <span class="bold green pull-right">${{ gig.price }}</span>
                         </p>
                     </div>

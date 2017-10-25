@@ -39,6 +39,8 @@
                                             <a href="{% url 'my_gigs' %}">My Gigs</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
+                                        <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
+                                        <li role="separator" class="divider"></li>
                                         <li>
                                             <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
                                         </li>
