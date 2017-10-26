@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from marketplace.settings import MEDIA_URL
-from marketplaceapp.models import Gig, Profile
+from marketplaceapp.models import Gig, Profile, Purchase
 from marketplaceapp.forms import GigForm
 
 import marketplaceapp.braintree_config
@@ -121,11 +121,8 @@ def create_purchase(request):
         })
 
         if result.is_success:
-            print('Success!')
-        else:
-            print('Failed')
+            Purchase.objects.create(gig=gig, buyer=request.user)
 
-        return None
         return redirect(home)
 
 def __update_profile(request, profile):
