@@ -130,6 +130,8 @@ def profile(request, username):
 @login_required(login_url=home)
 def create_purchase(request):
     if request.method == 'POST':
+        braintree_init()
+
         try:
             gig_id = request.POST.get('gig_id')
             gig = Gig.objects.get(id=gig_id)
