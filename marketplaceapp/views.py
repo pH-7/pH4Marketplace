@@ -189,6 +189,16 @@ def category(request, name):
     except KeyError:
         return redirect(home)
 
+def search(request):
+    """Our Search form easy thanks Django ORM and title__contains"""
+    gigs = Gig.objects.filter(title__contains=request.GET.get('title'))
+
+    return render(
+        request,
+        'home.html',
+        {'gigs': gigs, 'media_url': MEDIA_URL}
+    )
+
 def __update_profile(request, profile):
     profile.bio = request.POST.get('bio')
     profile.slogan = request.POST.get('slogan')
