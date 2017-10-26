@@ -24,17 +24,33 @@
                 <div class="panel-heading">
                     <h4>Review</h4>
                 </div>
+
+                {% if show_post_review %}
+                    <div class="panel-body">
+                        <form action="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea name="content" class="form-control">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Post Review</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+
                 <ul class="list-group">
-                    {% for i in '123' %}
+                    {% for review in reviews %}
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="{% static 'img/avatar.png' %}" alt="" class="img-circle center-block" height="60" width="60">
+                                    <img src="{% if review.user.profile.avatar %}{{ review.user.profile.avatar }}{% else %}{% static 'img/avatar.png' %}{% endif %}" alt="{{ review.user.username }}" class="img-circle center-block" height="60" width="60">
                                 </div>
 
                                 <div class="col-md-10">
-                                    <h5>Itom Man</h5>
-                                    <p>Great job man!</p>
+                                    <h5>{{ review.user.username }}</h5>
+                                    <p>{{ review.content }}</p>
                                 </div>
                             </div>
                         </li>
@@ -69,8 +85,6 @@
                                     }
                                 })
                             });
-                        </script>
-
                         </script>
                     {% else %}
                         <p class="alert alert-danger">You need to login to order a gig.</p>

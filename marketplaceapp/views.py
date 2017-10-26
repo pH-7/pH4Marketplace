@@ -4,10 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from marketplace.settings import MEDIA_URL
-from marketplaceapp.models import Gig, Profile, Purchase
+from marketplaceapp.models import Gig, Profile, Purchase, Review
 from marketplaceapp.forms import GigForm
 
-import marketplaceapp.braintree_config
+from marketplaceapp.braintree_config import braintree_init
 import braintree
 
 def home(request):
@@ -19,17 +19,39 @@ def home(request):
     )
 
 def gig_details(request, id):
+    if request.method == 'POST' and \
+        not request.user.is_anonymous() and \
+        Purchase.objects.filter(gig_id=id, buyer=request.user).count() > 0 and \
+        'content' in request.POST and \
+        request.POST.get('content').strip() != '':
+            Review.objects.create(
+                content=request.POST.get('content'),
+                gig_id=id,
+                user=request.user
+            )
+
     try:
         gig = Gig.objects.get(id=id)
     except Gig.DoesNotExist:
         return redirect(home)
 
-    client_token = braintree.ClientToken.generate()
+    if request.user.is_anonymous() or \
+        Purchase.objects.filter(gig_id=id, buyer=request.user).count() == 0 or \
+        Purchase.objects.filter(gig_id=id, user=request.user).count() > 0:
+            show_post_review = False
+    else:
+        show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
+
+    reviews = Review.objects.filter(gig=gig)
+    client_token = '' # Default value
+    if request.user.is_anonymous():
+        braintree_init()
+        client_token = braintree.ClientToken.generate()
 
     return render(
         request,
         'gig_details.html',
-        {'gig': gig, 'client_token': client_token, 'media_url': MEDIA_URL}
+        {'gig': gig, 'show_post_review': show_post_review, 'reviews': reviews, 'client_token': client_token, 'media_url': MEDIA_URL}
     )
 
 @login_required(login_url=home)
