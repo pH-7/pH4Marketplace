@@ -169,6 +169,26 @@ def my_purchases(request):
         {'purchases': purchases}
     )
 
+def category(request, name):
+    categories = {
+        'scripts-software': 'SS',
+        'graphics-design': 'GD',
+        'web-marketing': 'WM',
+        'videos': 'V',
+        'music': 'M'
+    }
+
+    try:
+        gigs = Gig.objects.filter(category=categories[name])
+
+        return render(
+            request,
+            'home.html',
+            {'gigs': gigs, 'media_url': MEDIA_URL}
+        )
+    except KeyError:
+        return redirect(home)
+
 def __update_profile(request, profile):
     profile.bio = request.POST.get('bio')
     profile.slogan = request.POST.get('slogan')
