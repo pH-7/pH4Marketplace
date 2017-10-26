@@ -37,7 +37,7 @@ def gig_details(request, id):
 
     if request.user.is_anonymous() or \
         Purchase.objects.filter(gig_id=id, buyer=request.user).count() == 0 or \
-        Purchase.objects.filter(gig_id=id, user=request.user).count() > 0:
+        Review.objects.filter(gig_id=id, user=request.user).count() > 0:
             show_post_review = False
     else:
         show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
