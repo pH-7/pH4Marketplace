@@ -43,6 +43,7 @@ def gig_details(request, id):
         show_post_review = Purchase.objects.filter(gig=gig, buyer=request.user).count() > 0
 
     reviews = Review.objects.filter(gig=gig)
+
     client_token = '' # Default value
     if request.user.is_anonymous():
         braintree_init()
