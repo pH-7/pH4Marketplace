@@ -7,6 +7,9 @@ from marketplace.settings import MEDIA_URL
 from marketplaceapp.models import Gig, Profile
 from marketplaceapp.forms import GigForm
 
+import marketplaceapp.braintree_config
+import braintree
+
 def home(request):
     gigs = Gig.objects.filter(status=True)
     return render(
@@ -21,10 +24,12 @@ def gig_details(request, id):
     except Gig.DoesNotExist:
         return redirect(home)
 
+    client_token = braintree.ClientToken.generate()
+
     return render(
         request,
         'gig_details.html',
-        {'gig': gig, 'media_url': MEDIA_URL}
+        {'gig': gig, 'client_token': client_token, 'media_url': MEDIA_URL}
     )
 
 @login_required(login_url='/')
@@ -98,6 +103,29 @@ def profile(request, username):
         'profile.html',
         {'profile': profile, 'gigs': gigs, 'media_url': MEDIA_URL}
     )
+
+@login_required(login_url='/')
+def create_purchase(request):
+    if request.method == 'POST':
+        try:
+            gig_id = request.POST.get('gig_id')
+            gig = Gig.objects.get(id=gig_id)
+        except Gig.DoesNotExist:
+            return redirect(home)
+
+        nonce = request.POST.get('payment_method_nonce')
+        result = braintree.Transaction.sale({
+            'amount': gig_price,
+            'payment_method_nonce': nonce
+        })
+
+        if result.is_success:
+            print('Success!')
+        else:
+            print('Failed')
+
+        return None
+        return redirect(home)
 
 def __update_profile(request, profile):
     profile.bio = request.POST.get('bio')
