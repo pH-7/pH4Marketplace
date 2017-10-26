@@ -32,7 +32,7 @@ def gig_details(request, id):
         {'gig': gig, 'client_token': client_token, 'media_url': MEDIA_URL}
     )
 
-@login_required(login_url='/')
+@login_required(login_url=home)
 def create_gig(request):
     error = '' # Default msg value
     if request.method == 'POST':
@@ -53,7 +53,7 @@ def create_gig(request):
         {'error': error}
     )
 
-@login_required(login_url='/')
+@login_required(login_url=home)
 def edit_gig(request, id):
     try:
         gig = Gig.objects.get(id=id, user=request.user)
@@ -76,7 +76,7 @@ def edit_gig(request, id):
     except Gig.DoesNotExist:
         return redirect(home)
 
-@login_required(login_url='/')
+@login_required(login_url=home)
 def my_gigs(request):
     gigs = Gig.objects.filter(user=request.user)
 
@@ -86,7 +86,7 @@ def my_gigs(request):
         {'gigs': gigs}
     )
 
-@login_required(login_url='/')
+@login_required(login_url=home)
 def profile(request, username):
     if request.method == 'POST':
         profile = Profile.objects.get(user=request.user)
@@ -105,7 +105,7 @@ def profile(request, username):
         {'profile': profile, 'gigs': gigs, 'media_url': MEDIA_URL}
     )
 
-@login_required(login_url='/')
+@login_required(login_url=home)
 def create_purchase(request):
     if request.method == 'POST':
         try:
