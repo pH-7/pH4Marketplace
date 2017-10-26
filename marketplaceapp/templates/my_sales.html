@@ -18,9 +18,9 @@
             </thead>
 
             <tbody>
-                {% for purchase in purchases}
+                {% for purchase in purchases %}
                     <tr>
-                        <td>{{ forloop.counter}}</td>
+                        <td>{{ forloop.counter }}</td>
                         <td>
                             <a href="{% url 'gig_details' purchase.gig.id %}">
                                 {{ purchase.gig.title }}
@@ -34,6 +34,7 @@
                         <td>{{ purchase.gig.price }}</td>
                         <td>{{ purchase.time }}</td>
                     </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
