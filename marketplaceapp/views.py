@@ -86,6 +86,7 @@ def my_gigs(request):
         {'gigs': gigs}
     )
 
+@login_required(login_url='/')
 def profile(request, username):
     if request.method == 'POST':
         profile = Profile.objects.get(user=request.user)
