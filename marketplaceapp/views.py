@@ -125,6 +125,26 @@ def create_purchase(request):
 
         return redirect(home)
 
+@login_required(login_url=home)
+def my_sales(request):
+    purchases = Purchase.objects.filter(gig__user=request.user)
+
+    return render(
+        request,
+        'my_sales.html',
+        {'purchases': purchases}
+    )
+
+@login_required(login_url=home)
+def my_purchases(request):
+    purchases = Purchase.objects.filter(buyer=request.user)
+
+    return render(
+        request,
+        'my_purchases.html',
+        {'purchases': purchases}
+    )
+
 def __update_profile(request, profile):
     profile.bio = request.POST.get('bio')
     profile.slogan = request.POST.get('slogan')
