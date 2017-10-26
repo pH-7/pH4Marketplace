@@ -2,7 +2,7 @@ import braintree
 
 braintree.Configuration.configure(
     braintree.Environment.Sandbox,
-    merchant_id="cbqd3ncztsszwbrh",
-    public_key="7mr28wc74trf2xp4",
-    private_key="3a21c73d4c362d0bf38080e9d87a5854"
+    merchant_id="nnrdhv8jcbptkj6z",
+    public_key="xjyj3dtj8w3x8kxq",
+    private_key="59b5b4248dcd13be8ff29e4f4ade559a"
 )
